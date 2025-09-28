@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>류승원 · 포트폴리오</title>
+  <meta name="description" content="풀스택 개발자 류승원의 포트폴리오" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Pretendard Variable 최신 폰트 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+
+  <!-- 테마/타이포 및 카드·스킬 스타일 -->
+  <style>
+    /* 기본: 라이트(담청색) */
+    :root{
+      --bg:#add8e6;
+      --text:#111827;
+      --muted:#374151;
+      --accent:#2563eb;
+      --card:#ffffff;
+      --card-on:#111827;
+      --card-muted:#4b5563;
+      --border:#d1d5db;
+    }
+    /* 다크 테마 */
+    body:not(.light){
+      --bg:#0f0f12;
+      --text:#ffffff;
+      --muted:rgba(255,255,255,.85);
+      --accent:#8ab4ff;
+      --card:#1e1e24;
+      --card-on:#ffffff;
+      --card-muted:rgba(255,255,255,.82);
+      --border:#3a3a44;
+    }
+
+    /* 링크(Projects 내 리스트 링크 포함) */
+    .links a{ text-decoration:none; color:var(--text); }
+    .links a:hover{ color:var(--accent); text-decoration:underline; }
+
+    /* 타이포 */
+    html{ -webkit-text-size-adjust:100%; }
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      letter-spacing:.01em;
+      font-family:"Pretendard Variable", Pretendard, system-ui, -apple-system,
+        "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic",
+        sans-serif;
+      line-height:1.6;
+    }
+    .section{ padding:64px 20px; }
+    .container{ max-width:960px; margin:0 auto; }
+    .section-title{ font-size:clamp(24px,2.4vw,32px); font-weight:800; margin:0 0 16px; }
+    .lead{ color:var(--muted); font-size:1.05rem; }
+    .bullets{ padding-left:18px; color:var(--muted); }
+    .bullets li{ margin:8px 0; }
+
+    /* 헤더 */
+    .site-header{
+      position:sticky; top:0; z-index:50;
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:16px 24px;
+      background:rgba(255,255,255,.7);
+      border-bottom:1px solid var(--border);
+      backdrop-filter:blur(8px);
+    }
+    body:not(.light) .site-header{ background:rgba(17,17,17,.5); }
+    .logo{ text-decoration:none; color:var(--text); font-weight:800; }
+    .nav a{ color:var(--muted); text-decoration:none; margin:0 10px; }
+    .nav a:hover{ color:var(--text); }
+    .theme-toggle{ background:transparent; border:1px solid var(--border); color:var(--text);
+      padding:8px 10px; border-radius:10px; cursor:pointer; }
+
+    /* 히어로 */
+    .hero{ min-height:calc(100svh - 64px); display:grid; place-items:center; text-align:center; }
+    .hero-inner{ max-width:880px; padding:0 16px; }
+    .avatar{ font-size:56px; filter:drop-shadow(0 6px 16px rgba(0,0,0,.35)); }
+    .hero h1{ font-size:clamp(28px,4.5vw,44px); margin:8px 0 6px; }
+    .subtitle{ color:var(--muted); margin:0 0 18px; }
+    .accent{ color:var(--accent); }
+    .cta{ display:flex; gap:10px; justify-content:center; }
+    .btn{
+      display:inline-block; padding:10px 16px; border-radius:12px;
+      text-decoration:none; border:1px solid var(--border); color:var(--text); background:#fff;
+      transition:transform .15s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover{ transform:translateY(-2px); }
+    .btn.primary{ background:var(--text); color:#cde9ff; border-color:transparent; }
+    .btn.secondary{ background:#e0f2fe; color:#111; }
+    body:not(.light) .btn{ background:#1e293b; color:#fff; }
+
+    /* 카드 (Projects/About 공통) */
+    .card{
+      background:var(--card); color:var(--card-on);
+      border:1px solid var(--border); border-radius:16px;
+      padding:16px; margin:16px 0;
+      box-shadow:0 10px 30px rgba(0,0,0,.10);
+    }
+    .card-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .card-head h3{ margin:6px 0; font-size:1.1rem; }
+    .badges{ display:flex; gap:6px; flex-wrap:wrap; }
+    .badges span{
+      font-size:.8rem; color:var(--card-muted);
+      padding:2px 8px; border:1px solid var(--border); border-radius:999px; background:transparent;
+    }
+    .card-body{ color:var(--card-muted); margin:8px 0 12px; }
+    .card .links a{ color:var(--card-on); }
+    .card .links a:hover{ color:var(--accent); }
+
+    /* Skills */
+    .skills-grid{ display:flex; flex-wrap:wrap; gap:16px; margin-top:16px; }
+    .skill{
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+      background:#fff; border:1px solid var(--border); border-radius:12px;
+      padding:10px; width:92px; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,.08);
+    }
+    body:not(.light) .skill{ background:#111827; border-color:#2f2f39; }
+    .skill img{ width:38px; height:38px; object-fit:contain; }
+    .skill span{ font-size:.8rem; font-weight:600; color:var(--text); }
+
+    /* Footer */
+    .site-footer{ text-align:center; padding:28px 16px; border-top:1px solid var(--border); color:var(--muted); }
+  </style>
+</head>
+<body>
+  <!-- Site Header -->
+  <header class="site-header">
+    <a href="#hero" class="logo">RSW</a>
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button id="themeToggle" aria-label="Toggle dark mode" class="theme-toggle">🌓</button>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="hero" class="section hero">
+      <div class="hero-inner">
+        <div class="avatar" aria-hidden="true">👨‍💻</div>
+        <h1>끊임없이 배우고,</h1> 
+        <h1>🌟 끝까지 해내는 긍정의 개발자! 🌟</h1> 
+        <h1><span class="accent">류승원</span>입니다.</h1>
+        <p class="subtitle">Spring Boot · MySQL · React · AWS — 문제를 끝까지 파고드는 풀스택 개발자</p>
+        <div class="cta">
+          <a href="#projects" class="btn primary">프로젝트 보러가기</a>
+          <a href="https://github.com/doomdex84" target="_blank" class="btn secondary">GitHub</a>
+        </div>
+      </div>
+    </section>
+
+<!-- ✅ About: Projects와 같은 구조 -->
+<section id="about" class="section container snap">
+  <h2 class="section-title">About</h2>
+
+  <!-- 카드 1개 -->
+  <article class="card">
+    <p class="card-body">
+      사용자의 요구를 데이터와 UI/UX로 풀어내는 풀스택 개발자입니다.
+      <strong>Spring Boot + MyBatis + MySQL</strong> 기반 백엔드와,
+      <strong>React + Tailwind UI</strong>를 중심으로 프로덕트를 만듭니다.
+      성능/보안/배포 자동화(CI/CD)에 관심이 많습니다.
+    </p>
+    <ul class="bullets">
+      <li><strong>Aniwell</strong> 펫 헬스케어 플랫폼 — OCR/AI/지도/알림 통합 (워크크루 모듈 포함)</li>
+      <li><strong>Farmlog</strong> 영농일지 — 공공데이터/동적 드롭다운/이미지 업로드</li>
+    </ul>
+    <a class="link" href="#contact">협업/채용 문의 →</a>
+  </article>
+</section>
+
+
+    <!-- Skills (아이콘 3종 반영됨) -->
+    <section id="skills" class="section">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+          <div class="skill">
+            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="Java" loading="lazy">
+            <span>Java</span>
+          </div>
+          <div class="skill">
+            <img src="https://cdn.simpleicons.org/springboot/6DB33F" alt="Spring Boot" loading="lazy">
+            <span>Spring Boot</span>
+          </div>
+          <div class="skill">
+            <img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL" loading="lazy">
+            <span>MySQL</span>
+          </div>
+          <div class="skill">
+            <img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" loading="lazy">
+            <span>React</span>
+          </div>
+          <div class="skill">
+            <img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" loading="lazy">
+            <span>Docker</span>
+          </div>
+          <div class="skill">
+            <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566777755/noticon/yfmwxv8nhnr5aqaxhxpg.png" alt="AWS" loading="lazy">
+            <span>AWS</span>
+          </div>
+          <div class="skill">
+            <img src="https://cdn.simpleicons.org/githubactions/2088FF" alt="GitHub Actions" loading="lazy">
+            <span>GitHub Actions</span>
+          </div>
+          <div class="skill">
+            <img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="TailwindCSS" loading="lazy">
+            <span>TailwindCSS</span>
+          </div>
+          <div class="skill">
+            <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1592435324/noticon/judba41udt3wtirdj4ek.png" alt="MyBatis" loading="lazy">
+            <span>MyBatis</span>
+          </div>
+          <div class="skill">
+            <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1687307488/noticon/o9lxyva5z8zbwyeaxers.png" alt="JPA" loading="lazy">
+            <span>JPA</span>
+          </div>
+          <div class="skill">
+            <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1633092729/noticon/svfvl5id84d7ptdwj0vd.png" alt="REST API" loading="lazy">
+            <span>REST API</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+
+        <article class="card reveal">
+          <div class="card-head">
+            <h3>
+              Farmlog — 영농일지 웹앱
+              <span class="badge kind personal">개인</span>
+            </h3>
+            <div class="badges">
+              <span>Spring Boot</span><span>JSP</span><span>MyBatis</span>
+            </div>
+          </div>
+          <p class="card-body">공공데이터 품목/품종 자동 매핑, 동적 드롭다운, 이미지 업로드, 개인 일지 보드.</p>
+          <ul class="links">
+            <li><a href="https://velog.io/@doomdex84/series/%EA%B0%9C%EC%9D%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%98%81%EB%86%8D%EC%9D%BC%EC%A7%80" target="_blank">과정 기록 (Velog)</a></li>
+            <li><a href="https://velog.io/@doomdex84/%EA%B0%9C%EC%9D%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-z5ccmfxv" target="_blank">결과 (Velog)</a></li>
+            <li><a href="https://github.com/doomdex84/2505_Farm_Log_Project.git" target="_blank">GitHub</a></li>
+            <li><a href="https://velog.io/@doomdex84/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%B0%9C%ED%91%9C-%EC%A0%95%EB%A6%AC" target="_blank">발표 & 느낀점</a></li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-head">
+            <h3>
+              Aniwell — 펫 헬스케어 플랫폼 (워크크루 모듈 포함)
+              <span class="badge kind team">팀</span>
+            </h3>
+            <div class="badges">
+              <span>Spring Boot</span><span>React</span><span>AWS</span>
+            </div>
+          </div>
+          <p class="card-body">
+            반려동물 등록/건강기록/크루모집(워크크루)/지도/알림/이미지 업로드/OCR을 통합한 풀스택 프로젝트.
+          </p>
+          <ul class="links">
+            <li><a href="https://docs.google.com/document/d/1QuWDZ-UW8pE6xCO2_0u29u66Rxs2oUUzGhd9iBB_a_8/edit?usp=sharing" target="_blank">팀 회의록 (Google Docs)</a></li>
+            <li><a href="https://www.notion.so/22a25b09255c80df9e02f2da4a8238ee" target="_blank">팀 협업 (Notion)</a></li>
+            <li><a href="https://velog.io/@doomdex84/series/%ED%8C%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8" target="_blank">과정 기록 (Velog)</a></li>
+            <li><a href="https://velog.io/@doomdex84/%ED%8C%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8" target="_blank">결과 (Velog)</a></li>
+            <li><a href="https://github.com/doomdex84/aniwell_Finall.git" target="_blank">GitHub</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact (그대로 유지) -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <p class="lead">협업/채용 문의는 아래 채널로 부탁드립니다.</p>
+        <ul class="contact">
+          <li>
+            <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1606895317/noticon/cffnbxeed08p0l4u44ru.png"
+                 alt="메일 아이콘" style="width:20px; height:20px; vertical-align:middle; margin-right:6px;">
+            <a href="mailto:doomdex84@gmail.com">doomdex84@gmail.com</a>
+          </li>
+          <li>
+            <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1657314597/noticon/caw1zj8mxyo0pm56bmlt.png"
+                 alt="GitHub 아이콘" style="width:20px; height:20px; vertical-align:middle; margin-right:6px;">
+            <a href="https://github.com/doomdex84" target="_blank">github.com/doomdex84</a>
+          </li>
+          <li>
+            <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1581345292/noticon/hbwtrewlv2xxxyqe3qpm.png"
+                 alt="Velog 아이콘" style="width:20px; height:20px; vertical-align:middle; margin-right:6px;">
+            <a href="https://velog.io/@doomdex84" target="_blank">velog.io/@doomdex84</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>© <span id="y"></span> 류승원. All rights reserved.</small>
+  </footer>
+
+  <script>
+    // 하단 연도
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

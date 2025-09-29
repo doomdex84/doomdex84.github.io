@@ -30,7 +30,7 @@ links.forEach(link => {
       if (target) {
         e.preventDefault();
         const headerH = document.querySelector('.site-header').offsetHeight;
-        const top = target.getBoundingClientRect().top + window.scrollY - headerH - 8;
+        const top = target.getBoundingClientRect().top + window.scrollY - 8;
         window.scrollTo({ top, behavior: 'smooth' });
       }
     }

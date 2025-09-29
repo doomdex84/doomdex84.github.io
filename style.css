@@ -219,3 +219,62 @@ body {
 }
 .section-title { letter-spacing: 0.015em; font-weight: 800; }
 
+/* =========================================================
+   Contact(아이콘 카드) — Skills 카드 사이즈와 동일하게 수정
+   =======================================================*/
+.section-contact { padding: 56px 0; }
+.section-contact h2 {
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 800;
+  margin: 0 0 12px;
+}
+.contact-desc { color: var(--muted); margin: 0 0 20px; }
+
+/* Contact 카드: Skills 카드와 동일한 크기 */
+.contact-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 16px;
+}
+
+.contact-tile {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  padding: 14px 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+  transition: transform .15s ease, box-shadow .2s ease;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.contact-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(0,0,0,.12);
+}
+
+.contact-tile img {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.contact-tile span {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* 다크 모드 대비 */
+@media (prefers-color-scheme: dark) {
+  .contact-tile { background: var(--card); color: var(--text); border-color: rgba(255,255,255,0.08); }
+  .contact-tile:hover { border-color: rgba(255,255,255,0.18); }
+  .contact-desc { color: var(--muted); }
+}

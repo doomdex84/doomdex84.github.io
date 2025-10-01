@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>류승원 · 포트폴리오</title>
   <meta name="description" content="풀스택 개발자 류승원의 포트폴리오" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20250929-2" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -124,6 +124,56 @@
 
     /* Footer */
     .site-footer{ text-align:center; padding:28px 16px; border-top:1px solid var(--border); color:var(--muted); }
+
+    /* ============================
+       ✅ [추가] 기록 슬라이더 전용 스타일
+       ============================ */
+       
+    #record-slider { background:#0000; padding:48px 0; } /* ✅ [수정] 위아래 여백 정돈 */
+    .gallery-wrap { max-width:960px; margin:0 auto; padding:0 20px; } /* 위 섹션과 동일 폭 */
+    .gallery-title{ font-size:clamp(22px,2.2vw,28px); font-weight:800; margin:0 0 16px; }
+
+    .gallery-viewport{
+      position:relative;
+      overflow:hidden;                 /* ✅ 가로 슬라이드 핵심 */
+      border-radius:16px;
+      background:#f8fafc;
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+    .gallery-track{
+      display:flex;                    /* ✅ 가로 배치 */
+      gap:0;
+      will-change:transform;
+      transition:transform .5s ease;   /* ✅ 한 장씩 부드럽게 이동 */
+    }
+    .gallery-slide{ min-width:100%; }  /* ✅ 항상 한 장만 보이도록 */
+    .gallery-slide img{
+      display:block;
+      width:100%;
+      height:420px;                    /* 필요 시 조절: 360~480 추천 */
+      object-fit:contain;              /* 비율 유지 */
+      background:#e9eef3;
+    }
+
+    .gallery-nav{
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:44px; height:44px; border:none; border-radius:50%;
+      background:rgba(0,0,0,.45); color:#fff; font-size:22px;
+      display:grid; place-items:center; cursor:pointer;
+    }
+    .gallery-nav:hover{ background:rgba(0,0,0,.6); }
+    .gallery-nav.prev{ left:12px; }
+    .gallery-nav.next{ right:12px; }
+
+    .gallery-dots{
+      display:flex; gap:8px; justify-content:center;
+      padding:14px 0 6px;
+    }
+    .gallery-dots button{
+      width:8px; height:8px; border-radius:50%;
+      border:none; background:#cbd5e1; cursor:pointer;
+    }
+    .gallery-dots button[aria-current="true"]{ background:#0ea5e9; }
   </style>
 </head>
 <body>
@@ -155,26 +205,25 @@
       </div>
     </section>
 
-<!-- ✅ About: Projects와 같은 구조 -->
-<section id="about" class="section container snap">
-  <h2 class="section-title">About</h2>
+    <!-- ✅ About: Projects와 같은 구조 -->
+    <section id="about" class="section container snap">
+      <h2 class="section-title">About</h2>
 
-  <!-- 카드 1개 -->
-  <article class="card">
-    <p class="card-body">
-      사용자의 요구를 데이터와 UI/UX로 풀어내는 풀스택 개발자입니다.
-      <strong>Spring Boot + MyBatis + MySQL</strong> 기반 백엔드와,
-      <strong>React + Tailwind UI</strong>를 중심으로 프로덕트를 만듭니다.
-      성능/보안/배포 자동화(CI/CD)에 관심이 많습니다.
-    </p>
-    <ul class="bullets">
-      <li><strong>Aniwell</strong> 펫 헬스케어 플랫폼 — OCR/AI/지도/알림 통합 (워크크루 모듈 포함)</li>
-      <li><strong>Farmlog</strong> 영농일지 — 공공데이터/동적 드롭다운/이미지 업로드</li>
-    </ul>
-    <a class="link" href="#contact">협업/채용 문의 →</a>
-  </article>
-</section>
-
+      <!-- 카드 1개 -->
+      <article class="card">
+        <p class="card-body">
+          사용자의 요구를 데이터와 UI/UX로 풀어내는 풀스택 개발자입니다.
+          <strong>Spring Boot + MyBatis + MySQL</strong> 기반 백엔드와,
+          <strong>React + Tailwind UI</strong>를 중심으로 프로덕트를 만듭니다.
+          성능/보안/배포 자동화(CI/CD)에 관심이 많습니다.
+        </p>
+        <ul class="bullets">
+          <li><strong>Aniwell</strong> 펫 헬스케어 플랫폼 — OCR/AI/지도/알림 통합 (워크크루 모듈 포함)</li>
+          <li><strong>Farmlog</strong> 영농일지 — 공공데이터/동적 드롭다운/이미지 업로드</li>
+        </ul>
+        <a class="link" href="#contact">협업/채용 문의 →</a>
+      </article>
+    </section>
 
     <!-- Skills (아이콘 3종 반영됨) -->
     <section id="skills" class="section">
@@ -271,45 +320,74 @@
             <li><a href="https://www.notion.so/22a25b09255c80df9e02f2da4a8238ee" target="_blank">팀 협업 (Notion)</a></li>
             <li><a href="https://velog.io/@doomdex84/series/%ED%8C%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8" target="_blank">과정 기록 (Velog)</a></li>
             <li><a href="https://velog.io/@doomdex84/%ED%8C%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8" target="_blank">결과 (Velog)</a></li>
-            <li><a href="https://github.com/doomdex84/aniwell_Finall.git" target="_blank">GitHub</a></li>
+            <li><a href="https://velog.io/@doomdex84/%ED%8C%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%A5%BC-%EB%A7%88%EC%B9%98%EB%A9%B4%EC%84%9C" target="_blank">프로젝트 발표 & 소감 (Velog)</a></li>
+            <li><a href="https://github.com/AniwellProject/AniwellProject.git" target="_blank">GitHub</a></li>
           </ul>
         </article>
       </div>
     </section>
 
+    <!-- ✅ [추가] 기록 슬라이더: Projects 아래 / Contact 위에 삽입 -->
+    <section id="record-slider" aria-label="프로젝트 기록 슬라이드">
+      <div class="gallery-wrap">
+        <h2 class="gallery-title">프로젝트 기록 (슬라이드)</h2>
+
+        <div class="gallery-viewport">
+          <ul class="gallery-track" id="galleryTrack" aria-live="polite">
+            <!-- 슬라이드 아이템들: 이미지 11장 -->
+            <li class="gallery-slide"><img src="/images/rec01.png" alt="기록 1" loading="lazy"></li>
+            <li class="gallery-slide"><img src="/images/rec02.png" alt="기록 2" loading="lazy"></li>
+            <li class="gallery-slide"><img src="/images/rec03.png" alt="기록 3" loading="lazy"></li>
+            <li class="gallery-slide"><img src="/images/rec04.png" alt="기록 4" loading="lazy"></li>
+            <li class="gallery-slide"><img src="/images/rec05.png" alt="기록 5" loading="lazy"></li>
+            <li class="gallery-slide"><img src="/images/rec06.png" alt="기록 6" loading="lazy"></li>
+            <li class="gallery-slide"><img src="/images/rec07.png" alt="기록 7" loading="lazy"></li>
+            <li class="gallery-slide"><img src="/images/rec08.jpg" alt="기록 8" loading="lazy"></li>
+            <li class="gallery-slide"><img src="/images/rec09.png" alt="기록 9" loading="lazy"></li>
+            <li class="gallery-slide"><img src="/images/rec10.png" alt="기록 10" loading="lazy"></li>
+            <li class="gallery-slide"><img src="/images/rec11.png" alt="기록 11" loading="lazy"></li>
+          </ul>
+
+          <!-- 내비게이션 -->
+          <button class="gallery-nav prev" id="btnPrev" aria-label="이전 슬라이드">‹</button>
+          <button class="gallery-nav next" id="btnNext" aria-label="다음 슬라이드">›</button>
+        </div>
+
+        <div class="gallery-dots" id="galleryDots" aria-label="슬라이드 인디케이터"></div>
+      </div>
+    </section>
+
     <!-- Contact (그대로 유지) -->
-   <section id="contact" class="section-contact container">
-  <h2>Contact</h2>
-  <p class="contact-desc">협업/채용 문의는 아래 아이콘을 통해 연락해주세요.</p>
+    <section id="contact" class="section-contact container">
+      <h2>Contact</h2>
+      <p class="contact-desc">협업/채용 문의는 아래 아이콘을 통해 연락해주세요.</p>
 
-  <ul class="contact-grid">
-    <!-- Gmail -->
-    <li>
-      <a class="contact-tile" href="mailto:doomdex84@gmail.com" target="_blank" rel="noopener">
-        <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1606895317/noticon/cffnbxeed08p0l4u44ru.png" alt="Gmail" />
-        <span>Email</span>
-      </a>
-    </li>
+      <ul class="contact-grid">
+        <!-- Gmail -->
+        <li>
+          <a class="contact-tile" href="mailto:doomdex84@gmail.com" target="_blank" rel="noopener">
+            <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1606895317/noticon/cffnbxeed08p0l4u44ru.png" alt="Gmail" />
+            <span>Email</span>
+          </a>
+        </li>
 
-    <!-- GitHub -->
-    <li>
-      <a class="contact-tile" href="https://github.com/doomdex84" target="_blank" rel="noopener">
-        <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1657314597/noticon/caw1zj8mxyo0pm56bmlt.png" alt="GitHub" />
-        <span>GitHub</span>
-      </a>
-    </li>
+        <!-- GitHub -->
+        <li>
+          <a class="contact-tile" href="https://github.com/doomdex84" target="_blank" rel="noopener">
+            <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1657314597/noticon/caw1zj8mxyo0pm56bmlt.png" alt="GitHub" />
+            <span>GitHub</span>
+          </a>
+        </li>
 
-    <!-- Velog -->
-    <li>
-      <a class="contact-tile" href="https://velog.io/@doomdex84" target="_blank" rel="noopener">
-        <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1581345292/noticon/hbwtrewlv2xxxyqe3qpm.png" alt="Velog" />
-        <span>Velog</span>
-      </a>
-    </li>
-  </ul>
-</section>
-
-
+        <!-- Velog -->
+        <li>
+          <a class="contact-tile" href="https://velog.io/@doomdex84" target="_blank" rel="noopener">
+            <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1581345292/noticon/hbwtrewlv2xxxyqe3qpm.png" alt="Velog" />
+            <span>Velog</span>
+          </a>
+        </li>
+      </ul>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -320,6 +398,108 @@
     // 하단 연도
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
+
+  <!-- ============================
+       ✅ [추가] 기록 슬라이더 로직
+       기존 script.js는 유지하고, 이 블록은 아래에 추가
+       ============================ -->
+  <script>
+  (function () {
+    const track = document.getElementById('galleryTrack');
+    if (!track) return;
+
+    const slides = Array.from(track.children);
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    const dotsWrap = document.getElementById('galleryDots');
+
+    let index = 0;
+    let timer = null;
+    const intervalMs = 3500;
+
+    // dots 생성
+    slides.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', `${i+1}번 슬라이드`);
+      if (i === 0) b.setAttribute('aria-current', 'true');
+      b.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(b);
+    });
+
+    function update() {
+      track.style.transform = `translateX(${-index * 100}%)`;
+      dotsWrap.querySelectorAll('button').forEach((b, i) => {
+        if (i === index) b.setAttribute('aria-current', 'true');
+        else b.removeAttribute('aria-current');
+      });
+    }
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      update();
+      restartAutoplay();
+    }
+    function next(){ goTo(index + 1); }
+    function prev(){ goTo(index - 1); }
+
+    btnNext.addEventListener('click', next);
+    btnPrev.addEventListener('click', prev);
+
+    // 키보드 접근성
+    track.setAttribute('tabindex', '0');
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft')  prev();
+    });
+
+    // 터치 스와이프
+    let startX = 0, dx = 0, dragging = false;
+    track.addEventListener('pointerdown', (e) => {
+      dragging = true; startX = e.clientX; dx = 0;
+      track.style.transition = 'none';
+      pauseAutoplay();
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      dx = e.clientX - startX;
+      const percent = (dx / track.clientWidth) * 100;
+      track.style.transform = `translateX(calc(${-index * 100}% + ${percent}%))`;
+    });
+    window.addEventListener('pointerup', () => {
+      if (!dragging) return;
+      dragging = false; track.style.transition = '';
+      if (Math.abs(dx) > track.clientWidth * 0.15) {
+        dx < 0 ? next() : prev();
+      } else {
+        update(); restartAutoplay();
+      }
+    });
+
+    // 자동재생(가시영역에서만)
+    const slider = document.getElementById('record-slider');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) startAutoplay(); else pauseAutoplay();
+      });
+    }, { threshold: 0.3 });
+    io.observe(slider);
+
+    function startAutoplay(){
+      if (timer) return;
+      timer = setInterval(next, intervalMs);
+    }
+    function pauseAutoplay(){ clearInterval(timer); timer = null; }
+    function restartAutoplay(){ pauseAutoplay(); startAutoplay(); }
+
+    // 마우스 오버 시 일시정지
+    slider.addEventListener('mouseenter', pauseAutoplay);
+    slider.addEventListener('mouseleave', startAutoplay);
+
+    // 초기 렌더
+    update();
+  })();
+  </script>
+
   <script src="script.js"></script>
 </body>
 </html>

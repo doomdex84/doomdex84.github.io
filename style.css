@@ -278,3 +278,87 @@ body {
   .contact-tile:hover { border-color: rgba(255,255,255,0.18); }
   .contact-desc { color: var(--muted); }
 }
+
+/* =========================================================
+   ✅ 슬라이더(Projects 아래 ~ Contact 위) 스타일
+   - 왼쪽 치우침 방지(ul 기본 여백 제거)
+   - 가로 슬라이드, 중앙정렬, 자동재생 UI 대비
+   =======================================================*/
+
+/* 슬라이더 컨테이너 크기 조절 (위 카드 폭과 맞춤) */
+.gallery-wrap {
+  max-width: 900px;          /* 필요 시 920px 등으로 조절 */
+  margin: 0 auto;            /* 가운데 정렬 */
+  padding: 0 20px;
+}
+
+/* 섹션 배경/여백(선택 사항) */
+#record-slider { background: #c5e4ed1f; padding: 48px 0; } /* ✅ [추가] */
+
+.gallery-title { font-weight: 800; margin: 0 0 16px; }
+
+/* 가로 슬라이드 뷰포트 */
+.gallery-viewport {
+  position: relative;
+  overflow: hidden;          /* ✅ 한 장만 보이도록 */
+  border-radius: 16px;
+  background: #f8fafc;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+/* ✅ 핵심: ul 기본 여백/불릿 제거 + 가로 행 구성 */
+.gallery-track {
+  margin: 0;                 /* ← 기본 margin 제거 */
+  padding: 0;                /* ← 기본 padding 제거 (왼쪽 들여쓰기 원인) */
+  list-style: none;          /* ← 불릿 제거 */
+  display: flex;             /* 가로 슬라이드 */
+  gap: 0;
+  will-change: transform;
+  transition: transform .5s ease; /* 부드러운 이동 */
+}
+
+/* ✅ 한 장씩 + 중앙정렬 */
+.gallery-slide {
+  min-width: 100%;
+  display: grid;             /* 가운데 정렬에 유리 */
+  place-items: center;       /* 가로/세로 중앙 */
+}
+
+/* 이미지 규칙: 비율 유지 + 최대 높이 제한(카드와 균형) */
+.gallery-slide img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: 420px;         /* 필요 시 360~480px로 조절 */
+  object-fit: contain;
+  display: block;
+  background: #e9eef3;
+  border-radius: 0;          /* 카드 안쪽 이미지는 각지게 */
+}
+
+/* 내비게이션 버튼 */
+.gallery-nav{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border: none; border-radius: 50%;
+  background: rgba(0,0,0,.45); color: #fff; font-size: 22px;
+  display: grid; place-items: center; cursor: pointer;
+}
+.gallery-nav:hover{ background: rgba(0,0,0,.6); }
+.gallery-nav.prev{ left: 12px; }
+.gallery-nav.next{ right: 12px; }
+
+/* 인디케이터 점 */
+.gallery-dots{
+  display: flex; gap: 8px; justify-content: center;
+  padding: 14px 0 6px;
+}
+.gallery-dots button{
+  width: 8px; height: 8px; border-radius: 50%;
+  border: none; background: #cbd5e1; cursor: pointer;
+}
+.gallery-dots button[aria-current="true"]{ background: #0ea5e9; }
+
+/* 반응형: 모바일에서 이미지 높이 살짝 축소 */
+@media (max-width: 640px){
+  .gallery-slide img{ max-height: 320px; }
+}

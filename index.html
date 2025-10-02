@@ -111,7 +111,7 @@
     .card .links a{ color:var(--card-on); }
     .card .links a:hover{ color:var(--accent); }
 
-    /* Skills */
+    /* Skills (원본) */
     .skills-grid{ display:flex; flex-wrap:wrap; gap:16px; margin-top:16px; }
     .skill{
       display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
@@ -128,7 +128,6 @@
     /* ============================
        ✅ [추가] 기록 슬라이더 전용 스타일
        ============================ */
-       
     #record-slider { background:#0000; padding:48px 0; } /* ✅ [수정] 위아래 여백 정돈 */
     .gallery-wrap { max-width:960px; margin:0 auto; padding:0 20px; } /* 위 섹션과 동일 폭 */
     .gallery-title{ font-size:clamp(22px,2.2vw,28px); font-weight:800; margin:0 0 16px; }
@@ -174,6 +173,37 @@
       border:none; background:#cbd5e1; cursor:pointer;
     }
     .gallery-dots button[aria-current="true"]{ background:#0ea5e9; }
+
+    /* ============================
+       ✨ [추가] Skills 타이포/간격 정리 패치
+       (원본 규칙은 유지하고, 아래 규칙으로 오버라이드)
+       ============================ */
+    .skills-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:20px 18px;
+      margin-top:16px;
+    }
+    .skill{
+      align-items:center;
+      justify-content:flex-start;
+      padding:18px 16px;
+      width:auto;
+      min-height:190px;            /* 설명 3줄 기준 균일 높이 */
+      gap:8px;
+      box-shadow:0 2px 6px rgba(0,0,0,.07);
+      border:1px solid var(--border);
+    }
+    .skill img{ width:40px; height:40px; margin-bottom:2px; }
+    .skill span{
+      font-size:.95rem; font-weight:800; margin:0; letter-spacing:.01em; color:var(--text);
+    }
+    .skill .skill-desc{
+      font-size:.82rem; line-height:1.45; color:var(--muted); margin-top:2px;
+      display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+      text-wrap:balance;
+    }
+    body:not(.light) .skill .skill-desc{ color:var(--card-muted); }
   </style>
 </head>
 <body>
@@ -225,7 +255,7 @@
       </article>
     </section>
 
-    <!-- Skills (아이콘 3종 반영됨) -->
+    <!-- Skills -->
     <section id="skills" class="section">
       <div class="container">
         <h2 class="section-title">Skills</h2>
@@ -233,46 +263,57 @@
           <div class="skill">
             <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="Java" loading="lazy">
             <span>Java</span>
+            <small class="skill-desc">도메인 로직/유효성/예외처리. Farmlog·Aniwell 핵심 서비스 개발.</small>
           </div>
           <div class="skill">
             <img src="https://cdn.simpleicons.org/springboot/6DB33F" alt="Spring Boot" loading="lazy">
             <span>Spring Boot</span>
+            <small class="skill-desc">REST API, 로그인/권한, 파일업로드, 페이징/검색, 전역 예외 처리.</small>
           </div>
           <div class="skill">
             <img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL" loading="lazy">
             <span>MySQL</span>
+            <small class="skill-desc">스키마 설계·정규화, 인덱스/조인 튜닝, 트랜잭션 기반 CRUD.</small>
           </div>
           <div class="skill">
             <img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" loading="lazy">
             <span>React</span>
+            <small class="skill-desc">크루 리스트/필터링, 지도 연동, 모달/상태 관리, 반응형 UI 구현.</small>
           </div>
           <div class="skill">
             <img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" loading="lazy">
             <span>Docker</span>
+            <small class="skill-desc">Spring+MySQL 컨테이너 구성, 이미지 빌드/배포, 환경 통일.</small>
           </div>
           <div class="skill">
             <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566777755/noticon/yfmwxv8nhnr5aqaxhxpg.png" alt="AWS" loading="lazy">
             <span>AWS</span>
+            <small class="skill-desc">EC2 배포, RDS 운영, S3/Cloudinary 연동(이미지 저장) 경험.</small>
           </div>
           <div class="skill">
             <img src="https://cdn.simpleicons.org/githubactions/2088FF" alt="GitHub Actions" loading="lazy">
             <span>GitHub Actions</span>
+            <small class="skill-desc">main 푸시 → 빌드·도커라이즈·EC2 배포 자동화 파이프라인.</small>
           </div>
           <div class="skill">
             <img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="TailwindCSS" loading="lazy">
             <span>TailwindCSS</span>
+            <small class="skill-desc">카드형 UI, 다크모드, 반응형 레이아웃 · 포트폴리오 스타일링.</small>
           </div>
           <div class="skill">
             <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1592435324/noticon/judba41udt3wtirdj4ek.png" alt="MyBatis" loading="lazy">
             <span>MyBatis</span>
+            <small class="skill-desc">동적 SQL, 매퍼 분리, 품목·품종 필터/페이지네이션 최적화.</small>
           </div>
           <div class="skill">
             <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1687307488/noticon/o9lxyva5z8zbwyeaxers.png" alt="JPA" loading="lazy">
             <span>JPA</span>
+            <small class="skill-desc">Spring Data 기반 CRUD, 연관관계/지연로딩 활용(일부 도메인).</small>
           </div>
           <div class="skill">
             <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1633092729/noticon/svfvl5id84d7ptdwj0vd.png" alt="REST API" loading="lazy">
             <span>REST API</span>
+            <small class="skill-desc">프론트(React/JSP/Thymeleaf)와 JSON 통신, 응답 규격/에러 표준화.</small>
           </div>
         </div>
       </div>
